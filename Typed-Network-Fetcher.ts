@@ -25,7 +25,5 @@ async function fetchApiData(
 
 // function call
 console.log("====================================");
-fetchApiData(3).then((product) => {
-  console.log(product);
-});
+fetchApiData(3).then(console.log);
 console.log("====================================");

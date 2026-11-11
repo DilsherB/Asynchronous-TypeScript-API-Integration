@@ -23,5 +23,5 @@ async function getPostById(postId) {
 //   console.log(post?.body);
 // });
 // console.log('====================================');
-console.log(getPostById(1).then((post) => console.log(post)));
+console.log(getPostById(1).then(console.log));
 // console.log('====================================');

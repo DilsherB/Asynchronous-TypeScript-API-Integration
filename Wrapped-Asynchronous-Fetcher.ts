@@ -38,5 +38,5 @@ async function fetchApiUser(userId: number): Promise<ApiResponse<ApiUser>> {
 }
 
 console.log("====================================");
-fetchApiUser(1).then((u) => console.log(u));
+fetchApiUser(1).then(console.log);
 console.log("====================================");

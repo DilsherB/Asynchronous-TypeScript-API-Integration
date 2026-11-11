@@ -28,6 +28,6 @@ async function fetchApiUser(userId) {
     }
 }
 console.log("====================================");
-fetchApiUser(1).then((u) => console.log(u));
+fetchApiUser(1).then(console.log);
 console.log("====================================");
 export {};

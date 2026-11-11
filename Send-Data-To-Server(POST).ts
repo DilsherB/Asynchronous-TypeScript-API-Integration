@@ -49,4 +49,4 @@ const productToAdd = {
   price: 200,
   category: "Sports Goods",
 };
-createProduct(productToAdd).then((result) => console.log(result));
+createProduct(productToAdd).then(console.log);
