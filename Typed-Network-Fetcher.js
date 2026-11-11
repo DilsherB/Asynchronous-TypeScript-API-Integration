@@ -1,4 +1,4 @@
-"use strict";
+import { mapProductData } from "./exportable.js";
 // mark the function as "async" and specify "promise" return type interface: "ApiProduct"
 async function fetchApiData(productId) {
     // try/catch block
@@ -11,14 +11,7 @@ async function fetchApiData(productId) {
         }
         // awiat and cast the parsed json data to interface: "ApiProduct"
         const fetchedProductData = await response.json();
-        const { id, title, category, price, tags } = fetchedProductData;
-        return {
-            id,
-            title,
-            category,
-            price,
-            tags,
-        };
+        return mapProductData(fetchedProductData);
     }
     catch (error) {
         // safely handle the unknown error types in catch block
@@ -30,7 +23,7 @@ async function fetchApiData(productId) {
 }
 // function call
 console.log("====================================");
-const getApiData = fetchApiData(1).then((product) => {
+fetchApiData(3).then((product) => {
     console.log(product);
 });
 console.log("====================================");

@@ -1,4 +1,4 @@
-import { ApiResponse } from "./Wrapped-Asynchronous-Fetcher";
+import { ApiResponse } from "./exportable.js";
 
 interface ProductPayload {
   title: string;

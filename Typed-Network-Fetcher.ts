@@ -1,10 +1,4 @@
-interface ApiProduct {
-  id: number;
-  title: string;
-  price: number;
-  category: string;
-  tags: string[];
-}
+import { ApiProduct, mapProductData } from "./exportable.js";
 // mark the function as "async" and specify "promise" return type interface: "ApiProduct"
 async function fetchApiData(
   productId: number,
@@ -19,14 +13,7 @@ async function fetchApiData(
     }
     // awiat and cast the parsed json data to interface: "ApiProduct"
     const fetchedProductData: ApiProduct = await response.json();
-    const { id, title, category, price, tags } = fetchedProductData;
-    return {
-      id,
-      title,
-      category,
-      price,
-      tags,
-    };
+    return mapProductData(fetchedProductData);
   } catch (error: unknown) {
     // safely handle the unknown error types in catch block
     const errorMsg = "Error in fetching product data.";
@@ -38,7 +25,7 @@ async function fetchApiData(
 
 // function call
 console.log("====================================");
-const getApiData = fetchApiData(1).then((product) => {
+fetchApiData(3).then((product) => {
   console.log(product);
 });
 console.log("====================================");

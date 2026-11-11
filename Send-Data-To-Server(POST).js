@@ -31,7 +31,7 @@ async function createProduct(product) {
 }
 console.log("====================================");
 const productToAdd = {
-    title: 2,
+    title: "Cricket Bat",
     price: 200,
     category: "Sports Goods",
 };

@@ -1,9 +1,4 @@
-export interface ApiResponse<T> {
-  success: boolean;
-  message: string;
-  data: T | undefined;
-}
-
+import { ApiResponse } from "./exportable.js";
 interface ApiUser {
   id: number;
   firstName: string;
