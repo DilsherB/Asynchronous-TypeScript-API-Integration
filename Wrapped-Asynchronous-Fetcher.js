@@ -1,4 +1,3 @@
-"use strict";
 async function fetchApiUser(userId) {
     try {
         const response = await fetch(`https://dummyjson.com/users/${userId}`);
@@ -31,3 +30,4 @@ async function fetchApiUser(userId) {
 console.log("====================================");
 fetchApiUser(1).then((u) => console.log(u));
 console.log("====================================");
+export {};
