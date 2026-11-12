@@ -1,32 +1,41 @@
-import { mapProductData } from "./exportable.js";
+import { mapProductData, productToAdd, } from "./exportable.js";
 class ProductService {
-    baseUrl = "https://dummyjson.com/products";
-    // Fetch one product
-    async getProduct(id) {
+    baseURL = `https://dummyjson.com/products`;
+    async getById(productId) {
         try {
-            const response = await fetch(`${this.baseUrl}/${id}`);
+            const response = await fetch(`${this.baseURL}/${productId}`);
             if (!response.ok) {
-                throw new Error(`Failed to fetch product: ${id}`);
+                throw new Error(`Failed to fetch product with ID: ${productId} with status: ${response.status}`);
             }
-            const product = await response.json();
-            return mapProductData(product);
+            const fetchedProduct = await response.json();
+            return mapProductData(fetchedProduct);
         }
         catch (error) {
-            console.error("Get product error:", error instanceof Error ? error.message : error);
+            console.error("Failed to fetch data", error instanceof Error ? error.message : error);
             return undefined;
         }
     }
-    // Fetch multiple products
-    async getProducts(ids) {
-        const results = await Promise.allSettled(ids.map((id) => this.getProduct(id)));
-        return results
-            .filter((result) => result.status === "fulfilled")
-            .map((result) => result.value)
-            .filter((product) => product !== undefined);
+    async createProduct(product) {
+        try {
+            const response = await fetch(`
+        ${this.baseURL}/add`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(product),
+            });
+            if (!response.ok) {
+                throw new Error(`Failed to post product with status: ${response.status}`);
+            }
+            const newProduct = await response.json();
+            return mapProductData(newProduct);
+        }
+        catch (error) {
+            console.error("Failed to POST data", error instanceof Error ? error.message : error);
+        }
     }
 }
-// Create service instance
 const productService = new ProductService();
-// Use service methods
-productService.getProduct(5).then((res) => console.log(res));
-productService.getProducts([1, 2, 3]).then(console.log);
+productService.getById(1).then(console.log);
+productService.createProduct(productToAdd).then(console.log);

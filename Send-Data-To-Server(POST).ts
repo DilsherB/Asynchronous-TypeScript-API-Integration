@@ -1,18 +1,13 @@
-import { ApiResponse } from "./exportable.js";
-
-interface ProductPayload {
-  title: string;
-  price: number;
-  category: string;
-}
-
-interface CreatedProduct extends ProductPayload {
-  id: number;
-}
+import {
+  ApiResponse,
+  productToAdd,
+  ProductPayload,
+  ApiProduct,
+} from "./exportable.js";
 
 async function createProduct(
   product: ProductPayload,
-): Promise<ApiResponse<CreatedProduct>> {
+): Promise<ApiResponse<ApiProduct>> {
   try {
     const response = await fetch(`https://dummyjson.com/products/add`, {
       method: "POST",
@@ -28,13 +23,13 @@ async function createProduct(
         data: undefined,
       };
     }
-    const newProduct: CreatedProduct = await response.json();
+    const newProduct: ApiProduct = await response.json();
     return {
       success: true,
       message: "Product posted/created successfully.",
       data: newProduct,
     };
-  } catch (error) {
+  } catch (error: unknown) {
     return {
       success: false,
       message: error instanceof Error ? error.message : "Request failed",
@@ -44,9 +39,5 @@ async function createProduct(
 }
 
 console.log("====================================");
-const productToAdd = {
-  title: "Cricket Bat",
-  price: 200,
-  category: "Sports Goods",
-};
+
 createProduct(productToAdd).then(console.log);

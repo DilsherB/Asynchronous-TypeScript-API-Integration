@@ -1,9 +1,12 @@
-export interface ApiProduct {
-  id: number;
+export interface ProductPayload {
   title: string;
   price: number;
   category: string;
   tags: string[];
+}
+
+export interface ApiProduct extends ProductPayload {
+  id: number;
 }
 
 export function mapProductData(product: ApiProduct): ApiProduct {
@@ -22,3 +25,14 @@ export interface ApiResponse<T> {
   message: string;
   data: T | undefined;
 }
+
+export interface CreatedProduct extends ProductPayload {
+  id: number;
+}
+
+export const productToAdd = {
+  title: "Cricket Bat",
+  price: 200,
+  category: "Sports Goods",
+  tags: ["cricket", "sports"]
+};

@@ -34,6 +34,7 @@ const productToAdd = {
     title: "Cricket Bat",
     price: 200,
     category: "Sports Goods",
+    tags: ["cricket", "sports"]
 };
-createProduct(productToAdd).then((result) => console.log(result));
+createProduct(productToAdd).then(console.log);
 export {};
